@@ -1,7 +1,7 @@
 import aws_cdk as core
 import aws_cdk.assertions as assertions
 
-from api_gateway_poc.api_gateway_poc_stack import ApiGatewayPocStack
+from api_gateway_poc.apigw_stack import ApiGatewayPocStack
 
 # example tests. To run these tests, uncomment this file along with the example
 # resource in api_gateway_poc/api_gateway_poc_stack.py
