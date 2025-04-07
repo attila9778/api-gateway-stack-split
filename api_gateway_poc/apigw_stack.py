@@ -46,17 +46,10 @@ class ApiGatewayStack(Stack):
             source_arn=rest_api.arn_for_execute_api()
         )
 
-        # resource_root = rest_api.root.add_resource("test")
-        # resource_root.add_method(
-        #     http_method='GET',
-        #     authorization_type=aws_apigateway.AuthorizationType.IAM
-        # )
-
-        # until 123 we are good, at 124 limit is exceeded
+        # until 123 resources we are good, at 124 limit is exceeded
         for n in range(2):
             resource_root = rest_api.root.add_resource(f"test_{n}")
             resource_root.add_method(
                 http_method='GET',
                 authorization_type=aws_apigateway.AuthorizationType.IAM,
             )
-
