@@ -36,7 +36,6 @@ class ApiGatewayStack(Stack):
             endpoint_types=[aws_apigateway.EndpointType.REGIONAL],
             deploy_options=aws_apigateway.StageOptions(stage_name="v1"),
             default_integration=default_integration,
-            # disable_execute_api_endpoint=True,
         )
 
         lambda_function.add_permission(

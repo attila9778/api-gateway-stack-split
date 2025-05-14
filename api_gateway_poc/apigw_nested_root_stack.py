@@ -52,7 +52,7 @@ class ApiGatewayNestedRootStack(Stack):
 
             # authorization_type=aws_apigateway.AuthorizationType.IAM,
         )
-        
+
         # Note: we need to add permission to the Lambda function to allow API Gateway to invoke it
         lambda_function.add_permission(
             id="API invoke permission",
@@ -90,17 +90,10 @@ class ApiGatewayNestedRootStack(Stack):
             resource_methods=all_methods
         )
 
-        # lambda_function.add_permission(
-        #     id="API invoke permission",
-        #     principal=aws_iam.ServicePrincipal("apigateway.amazonaws.com"),
-        #     action="lambda:InvokeFunction",
-        #     source_arn=self.get_rest_api_arn() + "/*/*"
-        # )
-
         CfnOutput(
             scope=self,
             id="api-gateway-arn",
-            value=self.get_rest_api_arn(),
+            value=self.get_rest_api_arn(),  # Note: different from rest_api.arn_for_execute_api()
             export_name="api-gateway-arn"
         )
 
