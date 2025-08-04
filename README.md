@@ -13,7 +13,7 @@ This repository complements my first technical blog post, where I share the stor
 api_gateway_poc/     
 ├── apigw_stack.py              # API Gateway in single stack
 ├── apigw_nested_root_stack.py  # Root stack for split API Gateway
-└── nested.                     # Parts of nested stack implementation
+└── nested                      # Parts of nested stack implementation
     ├── apigw_nested_stack.py   # API Gateway Resource definitions
     ├── apigw_deploy_stack.py   # API Gateway Deployment and Stage definitions
     ├── lambda_integration.py   # Custom Lambda Integration  
