@@ -1,16 +1,30 @@
 # Breaking up AWS API Gateway Resources into NestedStacks
 
-Welcome! This is a small AWS CDK (Python) project that demonstrates how to overcome the resource limit of an API Gateway in a single CloudFormation stack by breaking it up into NestedStacks and having a non-basic default integration.
+Welcome! This is a small AWS CDK (Python) project that demonstrates how to overcome the resource limit of an API Gateway in a single CloudFormation stack by breaking it up into NestedStacks and having a non-basic default integration, compared to a simple API Gateway setup.
 
 This repository complements my first technical blog post, where I share the story behind this setup, the problems I faced, and how I resolved them using CDK best practices and some workarounds.
+
+> 📖 Read the full story behind this implementation in the Medium blog post:
+[Breaking Up AWS API Gateway Resources into NestedStacks Using CDK](https://medium.com/@attila9778/breaking-up-aws-api-gateway-resources-into-nestedstacks-using-cdk-51f497a27bc0)
+
+## 🗃️ File Structure
+
+```graphql
+api_gateway_poc/     
+├── apigw_stack.py              # API Gateway in single stack
+├── apigw_nested_root_stack.py  # Root stack for split API Gateway
+└── nested.                     # Parts of nested stack implementation
+    ├── apigw_nested_stack.py   # API Gateway Resource definitions
+    ├── apigw_deploy_stack.py   # API Gateway Deployment and Stage definitions
+    ├── lambda_integration.py   # Custom Lambda Integration  
+└── lambda/                     # Example Lambda function code
+```
 
 ## 🧠 Motivation
 
 Long ago, I was working on an internal project that used AWS API Gateway extensively. At some point, we hit the **CloudFormation stack resource limit** due to the large number of endpoints.
 
 The official [AWS CDK documentation](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_apigateway-readme.html#breaking-up-methods-and-resources-across-stacks) briefly covers how to split API Gateway resources across stacks using **NestedStacks**. However, in practice, if we go with a solution closer to real-world application, I ran into several issues and edge cases not mentioned there.
-
-This repo demonstrates how I tackled those challenges.
 
 ## 🛠️ Key Concepts & Problems Solved
 
@@ -35,13 +49,6 @@ This repo demonstrates how I tackled those challenges.
     deployment.node.add_dependency(resource_stack)
     ```
 
-- **Understanding error messages**
-    One tricky error involved:
-    ```bash
-    The root method 'ANY' is required
-    ```
-    I explain what it means and how to fix it.
-
 ## 🧪 How to Run
   
 1. Make sure you have Python and AWS CDK installed.
@@ -53,14 +60,6 @@ This repo demonstrates how I tackled those challenges.
     ```bash
     cdk deploy
     ```
-
-## 🗃️ File Structure
-
-```graphql
-api_gateway_poc/     # CDK stack definitions
-lambda/              # Example Lambda function code
-app.py               # CDK app entry point
-```
 
 ## 📚 References
 
